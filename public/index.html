@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxe Beauty - Premium Cosmetics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header data-cy="header">
+    <div class="header-content">
+      <h1 data-cy="store-title">Luxe Beauty</h1>
+      <nav data-cy="nav">
+        <a href="#" data-link="home" class="active">Collections</a>
+        <a href="#" data-link="cart">Bag (<span data-cy="cart-count">0</span>)</a>
+        <span data-cy="auth-separator" class="auth-separator">|</span>
+        <a href="#" data-link="login" data-cy="login-link">Sign In</a>
+        <a href="#" data-link="register" data-cy="register-link">Join</a>
+        <a href="#" data-link="profile" data-cy="profile-link" class="hidden">Account</a>
+        <a href="#" data-link="logout" data-cy="logout-link" class="hidden">Sign Out</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="auth-section" data-cy="auth-section" class="hidden">
+    <h2 data-cy="auth-title">Welcome</h2>
+    <div class="auth-container">
+      <div id="login-form-container">
+        <h3 data-cy="login-title">Sign In</h3>
+        <form id="login-form" data-cy="login-form">
+          <div class="form-group">
+            <label data-cy="label-username">Username</label>
+            <input type="text" data-cy="input-username" name="username" required>
+          </div>
+          <div class="form-group">
+            <label data-cy="label-password">Password</label>
+            <input type="password" data-cy="input-password" name="password" required>
+          </div>
+          <button type="submit" data-cy="login-btn" class="btn btn-primary btn-large">Sign In</button>
+          <p class="auth-switch">
+            <a href="#" data-cy="switch-to-forgot">Forgot Password?</a> &nbsp;&middot;&nbsp; 
+            <a href="#" data-cy="switch-to-register">Create Account</a>
+          </p>
+        </form>
+      </div>
+      
+      <div id="forgot-form-container" class="hidden">
+        <h3 data-cy="forgot-title">Reset Password</h3>
+        <form id="forgot-form" data-cy="forgot-form">
+          <div class="form-group">
+            <label data-cy="label-forgot-email">Email Address</label>
+            <input type="email" data-cy="input-forgot-email" name="email" required>
+          </div>
+          <button type="submit" data-cy="forgot-btn" class="btn btn-primary btn-large">Send Reset Link</button>
+          <p class="auth-switch">
+            <a href="#" data-cy="switch-to-login-forgot">Back to Sign In</a>
+          </p>
+        </form>
+      </div>
+
+      <div id="register-form-container" class="hidden">
+        <h3 data-cy="register-title">Create Account</h3>
+        <form id="register-form" data-cy="register-form">
+          <div class="form-group">
+            <label data-cy="label-reg-username">Username</label>
+            <input type="text" data-cy="input-reg-username" name="username" required>
+          </div>
+          <div class="form-group">
+            <label data-cy="label-reg-email">Email Address</label>
+            <input type="email" data-cy="input-reg-email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label data-cy="label-reg-fullname">Full Name</label>
+            <input type="text" data-cy="input-reg-fullname" name="fullName">
+          </div>
+          <div class="form-group">
+            <label data-cy="label-reg-password">Password</label>
+            <input type="password" data-cy="input-reg-password" name="password" required>
+          </div>
+          <button type="submit" data-cy="register-btn" class="btn btn-primary btn-large">Create Account</button>
+          <p class="auth-switch">Already have an account? <a href="#" data-cy="switch-to-login">Sign In</a></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="profile-section" data-cy="profile-section" class="hidden">
+    <h2 data-cy="profile-title">My Account</h2>
+    <div class="profile-container">
+      <div class="profile-info">
+        <p><strong>Username:</strong> <span data-cy="profile-username"></span></p>
+        <p><strong>Email:</strong> <span data-cy="profile-email"></span></p>
+        <p><strong>Full Name:</strong> <span data-cy="profile-fullname"></span></p>
+        <p><strong>Member Since:</strong> <span data-cy="profile-created"></span></p>
+      </div>
+    </div>
+  </section>
+
+  <main data-cy="main">
+    <section id="products-section" data-cy="products-section">
+      <div class="filters" data-cy="filters">
+        <button data-cy="filter-all" class="filter-btn active" data-category="all">All</button>
+        <button data-cy="filter-skincare" class="filter-btn" data-category="Skincare">Skincare</button>
+        <button data-cy="filter-makeup" class="filter-btn" data-category="Face">Makeup</button>
+        <button data-cy="filter-lips" class="filter-btn" data-category="Lips">Lips</button>
+        <button data-cy="filter-eyes" class="filter-btn" data-category="Eyes">Eyes</button>
+      </div>
+      <div id="products-grid" data-cy="products-grid">
+      </div>
+    </section>
+
+    <section id="cart-section" data-cy="cart-section" class="hidden">
+      <h2 data-cy="cart-title">Shopping Bag</h2>
+      <div id="cart-items" data-cy="cart-items">
+      </div>
+      <div id="cart-empty" data-cy="cart-empty" class="empty-message hidden">
+        Your bag is empty. Discover our collections!
+      </div>
+      <div id="cart-summary" data-cy="cart-summary" class="hidden">
+        <div class="total" data-cy="cart-total">
+          <span>Total</span>
+          <span data-cy="total-amount">$0.00</span>
+        </div>
+        <button data-cy="checkout-btn" class="btn btn-primary btn-large">Proceed to Checkout</button>
+      </div>
+    </section>
+
+    <section id="checkout-section" data-cy="checkout-section" class="hidden">
+      <h2 data-cy="checkout-title">Checkout</h2>
+      <form id="checkout-form" data-cy="checkout-form">
+        <div class="form-group">
+          <label data-cy="label-name">Full Name</label>
+          <input type="text" data-cy="input-name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label data-cy="label-email">Email Address</label>
+          <input type="email" data-cy="input-email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label data-cy="label-phone">Phone Number</label>
+          <input type="tel" data-cy="input-phone" name="phone">
+        </div>
+        <div class="form-group">
+          <label data-cy="label-address">Shipping Address</label>
+          <textarea data-cy="input-address" name="address" required></textarea>
+        </div>
+        <div class="checkout-total">
+          <span>Total to Pay</span>
+          <span data-cy="checkout-total">$0.00</span>
+        </div>
+        <button type="submit" data-cy="place-order-btn" class="btn btn-primary btn-large">Place Order</button>
+      </form>
+    </section>
+
+    <section id="success-section" data-cy="success-section" class="hidden">
+      <div class="success-message" data-cy="success-message">
+        <h2>Order Confirmed</h2>
+        <p data-cy="order-number">Order #<span></span></p>
+        <p>Thank you for your purchase!</p>
+        <p style="margin-top: 20px; color: #999; font-size: 14px;">A confirmation email will be sent shortly.</p>
+        <button data-cy="continue-shopping-btn" class="btn btn-primary" style="margin-top: 30px;">Continue Shopping</button>
+      </div>
+    </section>
+  </main>
+
+  <footer data-cy="footer">
+    <p>&copy; 2024 Luxe Beauty. All Rights Reserved.</p>
+  </footer>
+
+  <div id="product-detail-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="modal-close" data-cy="modal-close">&times;</span>
+      <div class="product-detail" data-cy="product-detail">
+        <div class="product-detail-image">
+          <img id="detail-image" data-cy="detail-image" src="" alt="">
+        </div>
+        <div class="product-detail-info">
+          <span id="detail-category" data-cy="detail-category"></span>
+          <h2 id="detail-name" data-cy="detail-name"></h2>
+          <p id="detail-description" data-cy="detail-description"></p>
+          <div id="detail-details" data-cy="detail-details" class="detail-info-text"></div>
+          <p id="detail-price" data-cy="detail-price"></p>
+          <button id="detail-add-cart" data-cy="detail-add-cart" class="btn btn-primary btn-large">Add to Bag</button>
+        </div>
+      </div>
+      <div class="product-comments">
+        <h3 data-cy="comments-title">Customer Reviews</h3>
+        <div id="comments-list" data-cy="comments-list"></div>
+        <div id="add-comment" class="add-comment hidden">
+          <h4 data-cy="add-comment-title">Write a Review</h4>
+          <form id="comment-form" data-cy="comment-form">
+            <div class="form-group">
+              <label data-cy="label-rating">Rating</label>
+              <select data-cy="input-rating" name="rating">
+                <option value="5">5 - Excellent</option>
+                <option value="4">4 - Good</option>
+                <option value="3">3 - Average</option>
+                <option value="2">2 - Poor</option>
+                <option value="1">1 - Terrible</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label data-cy="label-comment">Your Review</label>
+              <textarea data-cy="input-comment" name="comment" required></textarea>
+            </div>
+            <button type="submit" data-cy="submit-comment-btn" class="btn btn-primary">Submit Review</button>
+          </form>
+        </div>
+        <p id="login-to-comment" data-cy="login-to-comment" class="hidden">Please <a href="#" data-cy="login-to-comment-link">sign in</a> to write a review.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
